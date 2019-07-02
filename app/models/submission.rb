@@ -3,14 +3,7 @@ class Submission
   include Mongoid::Paperclip
 
   STRONG_PARAMETERS = %i[
-    title
-    description
-    deadline
-    visible_date
-    do_plagiarism_check
-    exercise_test
-    exercise_hidden_test
-    exercise_stub
+    file
   ].freeze
 
   has_mongoid_attached_file :file

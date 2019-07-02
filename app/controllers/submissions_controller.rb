@@ -1,5 +1,5 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: [:show, :update, :destroy]
+  before_action :set_submission, only: [:show, :update, :destroy, :download]
 
   # GET /submissions
   def index
@@ -36,6 +36,10 @@ class SubmissionsController < ApplicationController
   # DELETE /submissions/1
   def destroy
     @submission.destroy
+  end
+
+  def download
+    send_file @submission.file.path
   end
 
   private
