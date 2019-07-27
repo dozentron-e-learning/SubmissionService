@@ -15,7 +15,7 @@ class Submission
     validation_status
   ].freeze
 
-  has_mongoid_attached_file :file
+  has_mongoid_attached_file :file, path: ':rails_root/private/:class/:attachment/:id_partition/:style/:filename'
 
   do_not_validate_attachment_file_type :file
 
