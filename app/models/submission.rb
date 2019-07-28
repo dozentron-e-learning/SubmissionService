@@ -1,6 +1,5 @@
 class Submission
   include Mongoid::Document
-  include Mongoid::Paperclip
 
   VALIDATION_NOT_PERFORMED = :not_performed
   VALIDATION_SUCCEEDED = :succeeded
@@ -15,9 +14,7 @@ class Submission
     validation_status
   ].freeze
 
-  has_mongoid_attached_file :file, path: ':rails_root/private/:class/:attachment/:id_partition/:style/:filename'
-
-  do_not_validate_attachment_file_type :file
+  mount_uploader :file, SubmissionUploader
 
   field :validation_status, type: Boolean, default: VALIDATION_NOT_PERFORMED
   field :exercise_id, type: BSON::ObjectId
