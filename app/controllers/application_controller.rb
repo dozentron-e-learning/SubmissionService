@@ -22,7 +22,7 @@ class ApplicationController < ActionController::API
         @token = token
         @jwt = JsonWebTokenService.decode token
         @current_user = CurrentUser.build @jwt['data']
-        # ActiveResourceBearerTokenService.token = @token
+        ActiveResourceBearerTokenService.token = @token
       end
     rescue JWT::ExpiredSignature
       headers.delete 'Authorization'
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::API
   end
 
   def reset_header
-    # ActiveResourceBearerTokenService.token = @token
+    ActiveResourceBearerTokenService.token = @token
   end
 
   def current_user

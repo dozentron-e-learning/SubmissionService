@@ -1,9 +1,9 @@
-class SubmissionsController < ApplicationController
+class Api::V1::SubmissionsController < ApplicationController
   before_action :set_submission, only: [:show, :update, :destroy, :download]
 
   # GET /submissions
   def index
-    @submissions = Submission.all
+    @submissions = Api::V1::Submission.all
 
     render json: @submissions
   end
@@ -15,7 +15,8 @@ class SubmissionsController < ApplicationController
 
   # POST /submissions
   def create
-    @submission = Submission.new(submission_params)
+    @submission = Api::V1::Submission.new(submission_params)
+    @submission.auth_token = @token
 
     if @submission.save
       render json: @submission, status: :created, location: @submission
@@ -46,11 +47,11 @@ class SubmissionsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_submission
-    @submission = Submission.find(params[:id])
+    @submission = Api::V1::Submission.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
   def submission_params
-    params.fetch(:submission, {}).permit Submission::STRONG_PARAMETERS
+    params.fetch(:submission, {}).permit Api::V1::Submission::STRONG_PARAMETERS
   end
 end
